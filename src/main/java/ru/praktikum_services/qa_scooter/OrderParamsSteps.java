@@ -9,8 +9,6 @@ import static io.restassured.RestAssured.given;
 
 public class OrderParamsSteps {
 
-    File jsonOrderParams = new File("src/main/resources/Order/colorOrderBody.json");
-
     public ValidatableResponse creatOrderParamColor(String firstName, String lastName, String address, int metroStation, String phone, int rentTime, String deliveryDate, String comment, List<String> color) {
         return given()
                 .header("Content-type", "application/json")

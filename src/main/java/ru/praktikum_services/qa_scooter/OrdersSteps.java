@@ -2,8 +2,6 @@ package ru.praktikum_services.qa_scooter;
 
 import io.restassured.response.ValidatableResponse;
 
-import java.io.File;
-
 import static io.restassured.RestAssured.given;
 
 public class OrdersSteps {

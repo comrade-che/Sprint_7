@@ -7,8 +7,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static io.restassured.RestAssured.given;
-
 public class CourierTest {
 
     String ResponseMessageLogin = "Этот логин уже используется. Попробуйте другой.";
@@ -23,11 +21,7 @@ public class CourierTest {
 
     @Test
     @Step("Check creat new courier. Check responce code successful. Check successful responce body")
-    // • курьера можно создать;
-    // • запрос возвращает правильный код ответа;
-    // • успешный запрос возвращает ok: true;
     public void createNewCourierCheckResponseAndValidBody(){
-        //RestAssured.filters(new RequestLoggingFilter(), new RequestLoggingFilter());
         courierSteps
                 .creatCourierValid()
                 .body("ok", Matchers.is(true))
@@ -36,9 +30,7 @@ public class CourierTest {
 
     @Test
     @Step("Check not creat same courier. Check responce code broken")
-    // • нельзя создать двух одинаковых курьеров;
     public void notCreateSameCourierCheckResponse(){
-        //RestAssured.filters(new RequestLoggingFilter(), new RequestLoggingFilter());
         courierSteps
                 .creatCourierValid();
         courierSteps.creatCourierValid()
@@ -47,9 +39,7 @@ public class CourierTest {
 
     @Test
     @Step("Check not creat duplicate login courier. Check responce code broken. Check broken responce body")
-    // • если создать пользователя с логином, который уже есть, возвращается ошибка
     public void notCreateDuplicateLoginCourierCheckResponseAndValidBody(){
-        //RestAssured.filters(new RequestLoggingFilter(), new RequestLoggingFilter());
         courierSteps
                 .creatCourierValid();
         courierSteps.creatCourierValid()
@@ -59,9 +49,7 @@ public class CourierTest {
 
     @Test
     @Step("Check not creat courier not obligatory fields. Check responce code broken. Check broken responce body")
-    // • если одного из полей нет, запрос возвращает ошибку;
     public void notCreateCourierNotOneFieldsRequiredCheckResponseAndValidBody(){
-        //RestAssured.filters(new RequestLoggingFilter(), new RequestLoggingFilter());
         courierSteps
                 .creatCourierValid();
         courierSteps.creatCourierInvalid()
@@ -72,9 +60,7 @@ public class CourierTest {
 
     @Test
     @Step("Check not creat courier with empty body. Check responce code broken")
-    // • чтобы создать курьера, нужно передать в ручку все обязательные поля;
     public void notCreateCourierEmptyBodyCheckResponse(){
-        //RestAssured.filters(new RequestLoggingFilter(), new RequestLoggingFilter());
         courierSteps
                 .creatCourierValid();
         courierSteps.creatCourierEmpty()
@@ -83,7 +69,6 @@ public class CourierTest {
 
     @After
     public void tearDown() {
-        //RestAssured.filters(new RequestLoggingFilter(), new RequestLoggingFilter());
         Integer id = courierSteps
                 .loginCourier()
                 .extract().body().path("id");
